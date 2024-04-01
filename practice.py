@@ -1,3 +1,3 @@
 def dayConverter():
 
-    daydict = {"1"}
+    daydict = {"1": Monday, "2": Tuesday}
