@@ -5,6 +5,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
+import sqlite3
 
 def challenge_1():
     """
@@ -40,16 +41,47 @@ def challenge_2(str1, str2):
     pprint(data_soup)"""
 
 def challenge_3():
-    URL = 'https://www.bbc.com/news'
+    URL = 'https://www.nytimes.com/'
     response = requests.get(URL)
     soup = BeautifulSoup(response.content, 'html.parser')
-    
-    # Extract the titles of the first 5 articles
+
     titles = []
-    for item in soup.find_all('h3')[:5]:  # Adjust the tag and class based on the website's HTML structure
+    for item in soup.select('p[class*="indicate-hover"]')[:5]:
         titles.append(item.get_text())
-    
+        
     pprint(titles)
+
+def challenge_4(n):
+    pass
+
+class challenge5:
+    """
+    I decided to create a class for this challenge because I wanted to created different methods, one for getting information about the database being used and another method to set/add data to the databse
+
+    Args: 
+    firstname, lastname, age, school, year_status(Freshmen, sophemore, junior, or senior)
+
+    Returns:
+    None
+
+    Prints:
+    The value of data inserted in the database
+    
+    """
+    def __init__(self, firstname, lastname, age, school, year_status = 'freshmen'):
+        """
+        class construtor, takes firstname, lastname, age, school, and keyargs year_status defaulted to Freshmen
+        """
+        self.__firstname = firstname
+        self.__lastname = lastname
+        self.__age = age
+        self.__school = school
+        self.__year_status = year_status
+
+
+
+        def challenge_5():
+        pass
 
 
 def main():
@@ -61,7 +93,7 @@ def main():
         if count == 0:
             userchoice = input("Please choose an option ('challenge 1', 'challenge 2', or 'none' to exit): ").lower()
         else: 
-            userchoice = input("If you want to view another challenge, same option as before ('challenge 1', 'challenge 2', or 'none' to exit: )").lower()
+            userchoice = input("If you want to view another challenge, same option as before ('challenge 1', 'challenge 2', or 'none' to exit): ").lower()
 
         if userchoice == 'challenge 1':
             print(challenge_1())
@@ -80,9 +112,12 @@ def main():
             print(f"well, the answer is {challenge_2(string1, string2)}!")
             count +=1
         elif userchoice == 'challenge 3':
+            print('This challenge uitilizes web scaping to get the top 5 news articles from the New York Time and print it for you in a list. ')
+
+            time.sleep(2)
             print(challenge_3())
             count +=1
-            
+
         else:
             pass
 
