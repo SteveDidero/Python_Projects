@@ -145,6 +145,72 @@ def challenge_7(str1 = 'steve', str2 = 'eetvs'):
         return False
     
 
+
+### this python script below uses a google link containing a specific formatted table containing coordinates(x,y) and character, utilises the implementataion of web scraping, specifically the requests module and beautifulsoup to get data and parse that data to be used on the matplotlib library for graphing.
+
+import requests
+import matplotlib.pyplot as plt
+
+from bs4 import BeautifulSoup
+
+urll = 'https://docs.google.com/document/d/e/2PACX-1vSHesOf9hv2sPOntssYrEdubmMQm8lwjfwv6NPjjmIRYs_FOYXtqrYgjh85jBUebK9swPXh_a5TJ5Kl/pub'
+
+def challenge_8(link=urll):
+    """
+    This function takes in a link in a form of a url and read in the content in the table of that url, perform some data formating and use it the formatted data to create a visual representation from the x, y and the corresponding character for each coordinates.
+
+    Args: 
+    url of a google doc contain a table formatted in a specific acceptable manner. 
+
+    Returns:
+    None
+
+    Prints:
+    None
+    """
+    response = requests.get(urll)
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+
+    titles = []
+    for item in soup.select('p[class*="c"]'):
+        titles.append(item.get_text())
+
+    utitles = []
+    for i in titles:
+        if 0 < len(i) < 3:
+            utitles.append(i)
+
+    nums1 = []
+    nums2 = []
+    char = []
+
+    while len(utitles) != 0:
+        
+        nums1.append(int(utitles[0]))
+        char.append(utitles[1])
+        nums2.append(int(utitles[2]))
+        
+        utitles = utitles[3:]
+
+    data_coords = list(zip(nums1, nums2, char))
+
+    fig, ax = plt.subplots()
+
+    for x, y, char in data_coords:
+        ax.text(x, y, char, fontsize=12, ha='center', va='center')
+
+
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 50)
+    ax.set_xlabel('X-axis')
+    ax.set_ylabel('Y-axis')
+    ax.set_title('Characters at Specific Coordinates')
+
+    plt.show()
+
+    
+
     
 
 
@@ -201,9 +267,16 @@ def main():
 
                 print(challenge_7(st1, st2))
                 count +=1
+        
             elif choice == 'none':
                 continue
+        elif userchoice == 'challenge 8':
+            print('This challenge uses a google link containing a specific formatted table containing coordinates(x,y) and character, utilises the implementataion of web scraping, specifically the requests module and beautifulsoup to get data and parse that data to be used on the matplotlib library for graphing a secret message. If you would to view the content of this google doc to see how the data looks like, please follow this link: https://docs.google.com/document/d/e/2PACX-1vSHesOf9hv2sPOntssYrEdubmMQm8lwjfwv6NPjjmIRYs_FOYXtqrYgjh85jBUebK9swPXh_a5TJ5Kl/pub')
 
+            time.sleep(4)
+
+            print(challenge_8())
+            count += 1
         else:
             pass
 
