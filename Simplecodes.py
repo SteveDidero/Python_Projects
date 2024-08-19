@@ -80,8 +80,73 @@ class challenge5:
 
 
 
-        def challenge_5():
+    def challenge_5():
         pass
+
+def challenge_6(slist = [[1,2,3,4], [2,1,4,3], [4,1,3,2]]):
+
+    lenght = len(slist[0])
+    l_sort = sorted(slist[0])
+
+    s_set = set()
+    
+
+    for i in slist:
+        for j in i:
+            s_set.add(j)
+
+    s_set = sorted(s_set)
+    if (lenght == len(s_set)) and (l_sort == s_set):
+        return True
+    else:
+        return False
+
+def challenge_7(str1 = 'steve', str2 = 'eetvs'):
+    """
+    This function check if two string of equal lenght are the same if at most only once swap can be performed for the two string to be same. Simply put, only one swap can be performed to make the two string the same.
+
+    Args:
+    string 1 and string 2
+
+    Returns:
+    Boolean(True or False)
+    
+    Prints:
+    None
+    """
+
+    l_str1 = [x for x in str1]
+    l_str2 = [x for x in str2]
+
+    lenght = len(l_str1)
+    
+    count = 0
+    for i,j in enumerate(l_str2):
+        if j != l_str1[i]:
+            count +=1
+
+    if count > 2:
+        return False
+    
+    s1 = []
+    s2 = []
+
+    for i in l_str1:
+        s1.append(i)
+
+    for i in l_str2:
+        s2.append(i)
+
+    ss1 = sorted(s1)
+    ss2 = sorted(s2)
+    if ss1 == ss2:
+        return True
+    else:
+        return False
+    
+
+    
+
 
 
 def main():
@@ -117,6 +182,27 @@ def main():
             time.sleep(2)
             print(challenge_3())
             count +=1
+        elif userchoice == 'challenge 6':
+            print(challenge_6())
+            count +=1
+        elif userchoice == 'challenge 7':
+            print('This function checks if two string of equal lenght are the same if at most only one swap can be performed for the two string to be same. Simply put, the two strings has to be of equal lenght and only two character can be at different location on string 2 than from string 1.')
+
+            time.sleep(1)
+            choice = input('If you would you like to provide two string for this challenge type "yes" or "defualt" to use the default arguments or "none" to stop: ').lower()
+
+            if choice == 'default':
+                print(challenge_7())
+                count +=1
+            elif choice == 'yes':
+                print('Sure but remember, two string of equal lenght and only two character placed differently in string 2 from string 1 for the challenge to evaluate to true!')
+                st1 = input('Please the first the string: ').lower()
+                st2 = input('And the second: ').lower()
+
+                print(challenge_7(st1, st2))
+                count +=1
+            elif choice == 'none':
+                continue
 
         else:
             pass
