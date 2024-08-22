@@ -78,12 +78,20 @@ class challenge5:
         self.__school = school
         self.__year_status = year_status
 
+    def challeneg_9(s, k):
+        list_s = [s[i:k] for i in range(len(s), k)]
+        
+        
+
 
 
     def challenge_5():
         pass
 
 def challenge_6(slist = [[1,2,3,4], [2,1,4,3], [4,1,3,2]]):
+    """
+    This function takes a  matrix list of n interger and check if every level of the metrix contain same range interger in ordered.
+    """
 
     lenght = len(slist[0])
     l_sort = sorted(slist[0])
@@ -114,6 +122,7 @@ def challenge_7(str1 = 'steve', str2 = 'eetvs'):
     Prints:
     None
     """
+
 
     l_str1 = [x for x in str1]
     l_str2 = [x for x in str2]
@@ -148,16 +157,13 @@ def challenge_7(str1 = 'steve', str2 = 'eetvs'):
 
 ### this python script below uses a google link containing a specific formatted table containing coordinates(x,y) and character, utilises the implementataion of web scraping, specifically the requests module and beautifulsoup to get data and parse that data to be used on the matplotlib library for graphing.
 
-import requests
 import matplotlib.pyplot as plt
-
-from bs4 import BeautifulSoup
 
 urll = 'https://docs.google.com/document/d/e/2PACX-1vSHesOf9hv2sPOntssYrEdubmMQm8lwjfwv6NPjjmIRYs_FOYXtqrYgjh85jBUebK9swPXh_a5TJ5Kl/pub'
 
 def challenge_8(link=urll):
     """
-    This function takes in a link in a form of a url and read in the content in the table of that url, perform some data formating and use it the formatted data to create a visual representation from the x, y and the corresponding character for each coordinates.
+    This function takes in a link in a form of a url and read in the content of the table of that url, perform some data formating and use it the formatted data to create a visual representation from the x, y and the corresponding character for each coordinates.
 
     Args: 
     url of a google doc contain a table formatted in a specific acceptable manner. 
@@ -168,7 +174,7 @@ def challenge_8(link=urll):
     Prints:
     None
     """
-    response = requests.get(urll)
+    response = requests.get(link)
     soup = BeautifulSoup(response.content, 'html.parser')
 
 
@@ -210,10 +216,6 @@ def challenge_8(link=urll):
     plt.show()
 
     
-
-    
-
-
 
 def main():
     print('Hello there, which function of this challenge serrie do you want to view? Simply type "challenge 1" or "challenge 2 and so on" but if you don\'t want to view anything, can type "none" to exit the session!')
@@ -277,6 +279,10 @@ def main():
 
             print(challenge_8())
             count += 1
+
+        elif userchoice in ['challenge 4', 'challenge 5']:
+            print('Apoligies but this challenge is not yet complete. For reference, there are conrently 8 challenges but challenge 4 and 5 are still in the works!')
+            time.sleep(2)
         else:
             pass
 
